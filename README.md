@@ -43,14 +43,21 @@ The Makers Checklist provides an overview of the steps required to build this de
 
 The [Bill of Materials](/Documentation/Rocket_Switch_Interface_BOM.xlsx) lists all of the parts and components required to build the Rocket Switch Interface.
 
+### 3. Order the PCBs
 
-### 3. Print the 3D Printable components
+The [Gerber_Files](/Build_Files/PCB_Files/Gerber_Files/) includes the PCB build information which can be submitted to PCB fabrication service to create the custom PCB. Please refer to [MMC-PCB](https://github.com/makersmakingchange/MMC-PCB) for more information on custom PCB fabrication. 
 
-All of the files and individual print files can be in the [/Build_Files/3D_Printing_Files](/Build_Files/3D_Printing/) folder.
+### 4. Print the 3D Printable components
 
-### 4. Assemble the Device
+All of the files and individual print files can be found in the [/Build_Files/3D_Printing_Files](/Build_Files/3D_Print_Files/) folder.
 
-Reference the [Assembly Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf) for the tools and steps required to build each portion.
+### 5. Assemble the Device
+
+Reference the [Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf) for the tools and steps required to build each portion.
+
+### 6. Upload the code
+
+The code can be found in the [Software_Files](/Build_Files/Software_Files/) folder. Please refer to Software Setup section in the [Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf).
 
 ## Files
 ### Documentation
@@ -64,11 +71,11 @@ Reference the [Assembly Guide](/Documentation/Rocket_Switch_Interface_Assembly_G
 | User Guide           | 1.0     | [Rocket Switch Interface Link_User_Guide](/Documentation/Rocket_Switch_Interface_User_Guide.pdf)    |
 | Changelog            | 1.0     | [Rocket Switch Interface Link_Changelog](/Documentation/Rocket_Switch_Interface_Changelog.pdf)     |
 
-### Design Files
- - [CAD Files](/Design_Files)
+### Case Design Files
+ - [3D_Printing_Files](/Design_Files/3D_Printing_Files)
 
-### Build Files
- - [3D Printing Files](/Build_Files/3D_Printing_Files)
+### EAGLE PCB Design Files
+ - [PCB_Files](/Design_Files/PCB_Files/)
 
 ## Attribution
 Designers:
