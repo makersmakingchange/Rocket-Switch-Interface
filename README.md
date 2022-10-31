@@ -30,7 +30,7 @@ If you would like to obtain this device, you may submit a build request through 
 
 ### 3. How to build this device for someone else
 
-If you have the skills and equipment to build this device, and would like to donate your time to create the switch for someone who needs it, visit the [MMC Maker Wanted](https://makersmakingchange.com/maker-wanted/) section.
+If you have the skills and equipment to build this device, and would like to donate your time to create the device for someone who needs it, visit the [MMC Maker Wanted](https://makersmakingchange.com/maker-wanted/) section.
 
 
 ## Getting Started
