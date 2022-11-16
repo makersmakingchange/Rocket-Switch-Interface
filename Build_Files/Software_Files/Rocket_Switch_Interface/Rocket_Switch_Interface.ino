@@ -2,7 +2,7 @@
  * File Name: Rocket_Switch_Interface.ino 
  * Title: Rocket Switch Interface
  * Developed by: MakersMakingChange
- * Version Number: 1.0 (28/10/2022)
+ * Version Number: 1.1 (15/11/2022)
  * Github Link: https://github.com/makersmakingchange/Rocket-Switch-Interface
  ***************************************************************************/
 
@@ -17,11 +17,10 @@
 //Can be changed based on the needs of the users
 #define MOUSE_MOVE_MULTI         2                                        //Morse mouse move multiplier 
 #define SWITCH_REACTION_TIME     50                                       //Minimum time for each switch action ( level 10 : 1x50 =50ms , level 1 : 10x50=500ms )
-#define DEFAULT_REACTION_LEVEL   9                                        //Default switch reaction level ( level 9 : 2x50 =100ms )
 #define SWITCH_MODE_CHANGE_TIME  4000                                     //How long to hold switch 4 to change mode 
 
-#define LED_BRIGHTNESS           20                                       //The mode led color brightness which is always on ( Use a low value to decrease power usage )
-#define LED_ACTION_BRIGHTNESS    20                                       //The action led color brightness which can be a higher value than LED_BRIGHTNESS
+#define LED_BRIGHTNESS           150                                      //The mode led color brightness which is always on ( Use a low value to decrease power usage )
+#define LED_ACTION_BRIGHTNESS    150                                      //The action led color brightness which can be a higher value than LED_BRIGHTNESS
 
 
 //Define Switch pins
@@ -38,7 +37,7 @@ int switch2State;
 
 //Stopwatches array used to time switch presses
 StopWatch timeWatcher[3];
-StopWatch switch1TimeWatcher[1];
+StopWatch switch2TimeWatcher[1];
 
 //Declare Switch variables for settings 
 int switchConfigured;
@@ -120,8 +119,8 @@ const switchStruct switchProperty[] {
 
 //Settings Action properties 
 const settingsActionStruct settingsProperty[] {
-    {1,"Increase Reaction",5},                             //{1=Increase Reaction,5=blue}
-    {2,"Decrease Reaction",6},                             //{2=Decrease Reaction,6=red}
+    {1,"Decrease Reaction",6},                             //{1=Increase Reaction,5=blue}
+    {2,"Increase Reaction",5},                             //{2=Decrease Reaction,6=red}
     {3,"Max Reaction",3},                                  //{3=Max Reaction,1=yellow}
     {4,"Min Reaction",3},                                  //{4=Min Reaction,1=yellow}
     {5,"Web Update",1}                                     //{5,"Web Update",2=green}
@@ -165,37 +164,37 @@ void loop() {
   static int ctr;                          //Control variable to set previous status of switches 
   unsigned long timePressed;               //Time that switch one or two are pressed
   unsigned long timeNotPressed;            //Time that switch one or two are not pressed
-  static int previousSwitch1State;         //Previous status of switch 1
+  static int previousSwitch2State;         //Previous status of switch 2
   
   //Update status of switch inputs
   switch1State = digitalRead(SWITCH1_PIN);
   switch2State = digitalRead(SWITCH2_PIN);
 
   timePressed = timeNotPressed  = 0;       //reset time counters
-  if (!ctr) {                              //Set previous status of switch one 
-    previousSwitch1State = HIGH;  
+  if (!ctr) {                              //Set previous status of switch two 
+    previousSwitch2State = HIGH;  
     ctr++;
   }
-  //Check if switch 1 is pressed to change switch mode
-  if (switch1State == LOW && previousSwitch1State == HIGH) {
-     if (switch1State == LOW) { 
-      previousSwitch1State = LOW; 
+  //Check if switch 2 is pressed to change switch mode
+  if (switch2State == LOW && previousSwitch2State == HIGH) {
+     if (switch2State == LOW) { 
+      previousSwitch2State = LOW; 
      }
-     switch1TimeWatcher[0].stop();                                //Reset and start the timer         
-     switch1TimeWatcher[0].reset();                                                                        
-     switch1TimeWatcher[0].start(); 
+     switch2TimeWatcher[0].stop();                                //Reset and start the timer         
+     switch2TimeWatcher[0].reset();                                                                        
+     switch2TimeWatcher[0].start(); 
   }
-  // Switch 1 was released
-  if (switch1State == HIGH && previousSwitch1State == LOW) {
-    previousSwitch1State = HIGH;
-    timePressed = switch1TimeWatcher[0].elapsed();                //Calculate the time that switch one was pressed 
-    switch1TimeWatcher[0].stop();                                 //Stop the single action (dot/dash) timer and reset
-    switch1TimeWatcher[0].reset();
+  // Switch 2 was released
+  if (switch2State == HIGH && previousSwitch2State == LOW) {
+    previousSwitch2State = HIGH;
+    timePressed = switch2TimeWatcher[0].elapsed();                //Calculate the time that switch one was pressed 
+    switch2TimeWatcher[0].stop();                                 //Stop the single action (dot/dash) timer and reset
+    switch2TimeWatcher[0].reset();
     //Perform action if the switch has been hold active for specified time
     if (timePressed >= SWITCH_MODE_CHANGE_TIME){
       incrementSwitchMode();                                                                
     } else if(switchMode==4) {
-      settingsAction(LOW,switch2State); 
+      settingsAction(switch1State,LOW); 
     }
   }
   //Perform actions based on the mode
@@ -210,7 +209,7 @@ void loop() {
         mouseAction(switch1State,switch2State);                                             //Mouse Switch mode
         break;
       case 4:
-        settingsAction(HIGH,switch2State);                                                  //Settings mode
+        settingsAction(switch1State,HIGH);                                                  //Settings mode
         break;
   };
   ledPixels.show(); 
@@ -225,11 +224,48 @@ void displayFeatureList(void) {
   Serial.println(" --- ");
   Serial.println("Rocket Switch Interface");
   Serial.println(" ");
-  Serial.println("VERSION: 1.0 (28 October 2022)");
+  Serial.println("VERSION: 1.0 (5 October 2022)");
   Serial.println(" --- ");
   Serial.println(" ");
 
 }
+
+//***MODIFY SETTINGS FUNCTION***//
+
+void modifySetting(void) {
+  if (Serial.available() > 0) {
+    String serialString = Serial.readString();
+    if(serialString.length()==6){
+      String outputString = "";
+      serialString.toCharArray(inputCommand, 7);
+      if(inputCommand[0] == 'S' && inputCommand[1] == 'S' && inputCommand[2] == ',' && inputCommand[3] == '0' && inputCommand[4] == ':' && inputCommand[5] == '0'){
+        inputCommand[5] = switchReactionLevel;
+        outputString = String(inputCommand);
+        Serial.println(outputString);
+      }
+      else if(inputCommand[0] == 'S' && inputCommand[1] == 'S' && inputCommand[2] == ',' && inputCommand[3] == '1' && inputCommand[4] == ':'){
+        updateReactionLevel(inputCommand[5]-'0');
+        inputCommand[5] = switchReactionLevel;
+        outputString = String(inputCommand);
+        Serial.println(outputString);
+      }
+      else if(inputCommand[0] == 'M' && inputCommand[1] == 'D' && inputCommand[2] == ',' && inputCommand[3] == '0' && inputCommand[4] == ':' && inputCommand[5] == '0'){
+        inputCommand[5] = switchMode;
+        outputString = String(inputCommand);
+        Serial.println(outputString);
+      }
+      else if(inputCommand[0] == 'M' && inputCommand[1] == 'D' && inputCommand[2] == ',' && inputCommand[3] == '1' && inputCommand[4] == ':'){
+        updateSwitchMode(inputCommand[5]-'0');
+        inputCommand[5] = switchMode;
+        outputString = String(inputCommand);
+        Serial.println(outputString);
+      }
+    }
+
+  }
+}
+
+
 
 //***RGB LED FUNCTION***//
 
@@ -293,8 +329,6 @@ void ledClear() {
   ledPixels.show(); 
 }
 
-//***SWITCH ACTION LED FEEDBACK FUNCTION***//
-
 void switchFeedback(int switchNumber,int modeNumber,int delayTime, int blinkNumber =1)
 {
   //Get previous led color and brightness 
@@ -302,6 +336,7 @@ void switchFeedback(int switchNumber,int modeNumber,int delayTime, int blinkNumb
   uint8_t previousBrightness = getLedBrightness();
  
   //updateLedColor(switchProperty[switchNumber-1].switchColorNumber,LED_ACTION_BRIGHTNESS);
+  //delay(MORSE_REACTION);
   setLedBlink(blinkNumber,delayTime,switchProperty[switchNumber-1].switchColorNumber,LED_ACTION_BRIGHTNESS);
   delay(5);
 
@@ -309,8 +344,6 @@ void switchFeedback(int switchNumber,int modeNumber,int delayTime, int blinkNumb
   setLedColor(previousColor,previousBrightness);
   
 }
-
-//***SETTINGS ACTION LED FEEDBACK FUNCTION***//
 
 void settingsFeedback(int settingsNumber,int modeNumber,int delayTime, int blinkNumber =1)
 {
@@ -325,8 +358,6 @@ void settingsFeedback(int settingsNumber,int modeNumber,int delayTime, int blink
   setLedColor(previousColor,previousBrightness);
   
 }
-
-//***MODE LED FEEDBACK FUNCTION***//
 
 void modeFeedback(int modeNumber,int delayTime, int blinkNumber =1)
 {
@@ -352,7 +383,7 @@ void switchSetup() {
   
   if (switchConfigured==0) {
     //Define default settings if it's first time running the code
-    switchReactionLevel=DEFAULT_REACTION_LEVEL;
+    switchReactionLevel=10;
     switchMode=1;
     switchConfigured=1;
     switchMouseMove=2;
@@ -386,7 +417,6 @@ void switchSetup() {
     switchReactionTime = ((11-switchReactionLevel)*SWITCH_REACTION_TIME);
 }
 
-//***INITIALIZE LED FEEDBACK FUNCTION***//
 
 void initLedFeedback(){
   setLedBlink(2,500,modeProperty[switchMode-1].modeColorNumber,LED_ACTION_BRIGHTNESS);
@@ -432,6 +462,7 @@ void mouseAction(int switch1,int switch2) {
 //***PERFORM MOUSE ACTIONS FUNCTION***//
 
 void mousePerform(int actionNumber,int xValue,int yValue) {
+
     switch (actionNumber) {
       case 0:
         break;
@@ -482,7 +513,26 @@ void incrementSwitchMode(){
     else {
     }
 
+    
     //Blink 2 times in modes color 
+    //setLedBlink(2,500,modeProperty[switchMode].modeColorNumber,LED_ACTION_BRIGHTNESS);
+    modeFeedback(switchMode,500,2);
+
+    //Serial print switch mode
+    Serial.print("Switch Mode: ");
+    Serial.println(switchMode);
+    
+    //Save switch mode in flash storage
+    switchModeFlash.write(switchMode);
+    delay(25);
+}
+
+//***UPDATE SWITCH MODE FUNCTION***//
+
+void updateSwitchMode(int inputSwitchMode){
+    if ((inputSwitchMode < (sizeof (modeProperty) / sizeof (modeProperty[0]))+1) && (inputSwitchMode > 0)) {
+      switchMode=inputSwitchMode;
+    } 
     modeFeedback(switchMode,500,2);
 
     //Serial print switch mode
@@ -505,6 +555,23 @@ void settingsAction(int switch1,int switch2) {
   }
 }
 
+//***Update SWITCH REACTION LEVEL FUNCTION***//
+
+void updateReactionLevel(int inputReactionLevel) {
+  if (inputReactionLevel >= 0 && inputReactionLevel <= 10) {
+    switchReactionLevel = inputReactionLevel;
+    settingsFeedback(5,switchMode,100,switchReactionLevel);
+    switchReactionTime = ((11-switchReactionLevel)*SWITCH_REACTION_TIME);
+    Serial.print("Reaction level: ");
+    Serial.println(switchReactionLevel);
+    Serial.print("Reaction Time(ms): ");
+    Serial.print(switchReactionTime);
+    switchReactionLevelFlash.write(switchReactionLevel);
+    delay(25);
+  } else {
+    delay(25);
+  }
+}
 
 //***INCREASE SWITCH REACTION LEVEL FUNCTION***//
 
@@ -523,7 +590,7 @@ void increaseReactionLevel(void) {
   Serial.print("Reaction level: ");
   Serial.println(switchReactionLevel);
   Serial.print("Reaction Time(ms): ");
-  Serial.println(switchReactionTime);
+  Serial.print(switchReactionTime);
   switchReactionLevelFlash.write(switchReactionLevel);
   delay(25);
 }
@@ -545,7 +612,7 @@ void decreaseReactionLevel(void) {
   Serial.print("Reaction level: ");
   Serial.println(switchReactionLevel);
   Serial.print("Reaction Time(ms): ");
-  Serial.println(switchReactionTime);
+  Serial.print(switchReactionTime);
   
   switchReactionLevelFlash.write(switchReactionLevel);
   delay(25);
