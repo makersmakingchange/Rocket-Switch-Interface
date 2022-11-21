@@ -1,0 +1,5 @@
+{
+    "configuration": "opt=small,usbstack=arduino,debug=off",
+    "board": "adafruit:samd:adafruit_rotarytrinkey_m0",
+    "sketch": "Rocket_Switch_Interface.ino"
+}

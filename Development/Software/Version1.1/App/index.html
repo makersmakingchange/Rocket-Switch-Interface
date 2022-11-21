@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rocket Switch Interface</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,100&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./dist/css/styles.css">
+</head>
+<body>
+
+  <main>
+    <section class="elements">
+      <div class="element">
+        <h2>Connect to a serial port</h2>
+        <button id="connect-to-serial">Connect</button>
+      </div>
+      <div class="element">
+        <h2>Send an action</h2>
+        <button class="message-button" data-value="@0" disabled="true">Off</button>
+        <button class="message-button" data-value="@1" disabled="true">On</button>
+        <button class="message-button" data-value="@2" disabled="true">Blink</button>
+      </div>
+      <div class="element">
+        <h2>Send a color</h2>
+			<div class="color-picker-container">
+				<input type="color" id="color_picker" value="#00ff00" disabled="true" class="color-picker">
+			</div>
+      </div>
+      <div class="element">
+        <h2>Get a message back:</h2>
+        <ol id="serial-messages-container"></ol>
+      </div>
+    </section>
+    <div class="repo-link">
+      <a href="">GitHub</a>
+    </div>
+  </main>
+  <script src="./dist/js/serial-handler.js" type="module"></script>
+  <script src="./dist/js/app.js" type="module"></script>
+</body>
+</html>

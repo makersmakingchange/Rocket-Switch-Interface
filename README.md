@@ -30,7 +30,7 @@ If you would like to obtain this device, you may submit a build request through 
 
 ### 3. How to build this device for someone else
 
-If you have the skills and equipment to build this device, and would like to donate your time to create the device for someone who needs it, visit the [MMC Maker Wanted](https://makersmakingchange.com/maker-wanted/) section.
+If you have the skills and equipment to build this device, and would like to donate your time to create the switch for someone who needs it, visit the [MMC Maker Wanted](https://makersmakingchange.com/maker-wanted/) section.
 
 
 ## Getting Started
@@ -43,39 +43,32 @@ The Makers Checklist provides an overview of the steps required to build this de
 
 The [Bill of Materials](/Documentation/Rocket_Switch_Interface_BOM.xlsx) lists all of the parts and components required to build the Rocket Switch Interface.
 
-### 3. Order the PCBs
 
-The [Gerber_Files](/Build_Files/PCB_Files/Gerber_Files/) includes the PCB build information which can be submitted to PCB fabrication service to create the custom PCB. Please refer to [MMC-PCB](https://github.com/makersmakingchange/MMC-PCB) for more information on custom PCB fabrication. 
+### 3. Print the 3D Printable components
 
-### 4. Print the 3D Printable components
+All of the files and individual print files can be in the [/Build_Files/3D_Printing_Files](/Build_Files/3D_Printing/) folder.
 
-All of the files and individual print files can be found in the [/Build_Files/3D_Printing_Files](/Build_Files/3D_Print_Files/) folder.
+### 4. Assemble the Device
 
-### 5. Assemble the Device
-
-Reference the [Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf) for the tools and steps required to build each portion.
-
-### 6. Upload the code
-
-The code can be found in the [Software_Files](/Build_Files/Software_Files/) folder. Please refer to Software Setup section in the [Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf).
+Reference the [Assembly Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf) for the tools and steps required to build each portion.
 
 ## Files
 ### Documentation
 | Document             | Version | Link |
 |----------------------|---------|------|
-| Design Rationale     | 1.0     | [Rocket Switch Interface Design_Rationale](/Documentation/Rocket_Switch_Interface_Design_Rationale.pdf)     |
-| Maker Checklist      | 1.0     | [Rocket Switch Interface Link_Maker_Checklist](/Documentation/Rocket_Switch_Interface_Maker_Checklist.pdf)     |
-| Bill of Materials    | 1.0     | [Rocket Switch Interface Link_Bill_of_Materials](/Documentation/Rocket_Switch_Interface_BOM.xlsx)     |
-| 3D Printing Guide    | 1.0     | [Rocket Switch Interface Link_3D_Printing_Guide](/Documentation/Rocket_Switch_Interface_3D_Printing_Guide.pdf)     |
-| Assembly Guide       | 1.0     | [Rocket Switch Interface Link_Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf)     |
-| User Guide           | 1.0     | [Rocket Switch Interface Link_User_Guide](/Documentation/Rocket_Switch_Interface_User_Guide.pdf)    |
-| Changelog            | 1.0     | [Rocket Switch Interface Link_Changelog](/Documentation/Rocket_Switch_Interface_Changelog.pdf)     |
+| Design Rationale     | 1.0     | [Rocket_Switch_Interface_Design_Rationale](/Documentation/Rocket_Switch_Interface_Design_Rationale.pdf)     |
+| Maker Checklist      | 1.0     | [Rocket_Switch_Interface_Maker_Checklist](/Documentation/Rocket_Switch_Interface_Maker_Checklist.pdf)     |
+| Bill of Materials    | 1.0     | [Rocket_Switch_Interface_BOM](/Documentation/Rocket_Switch_Interface_BOM.xlsx)     |
+| 3D Printing Guide    | 1.0     | [Rocket_Switch_Interface_3D_Printing_Guide](/Documentation/Rocket_Switch_Interface_3D_Printing_Guide.pdf)     |
+| Assembly Guide       | 1.0     | [Rocket_Switch_Interface_Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf)     |
+| User Guide           | 1.0     | [Rocket_Switch_Interface_User_Guide](/Documentation/Rocket_Switch_Interface_User_Guide.pdf)    |
+| Changelog            | 1.0     | [Rocket_Switch Interface Changelog](/Documentation/Rocket_Switch_Interface_Changelog.pdf)     |
 
-### Case Design Files
- - [3D_Printing_Files](/Design_Files/3D_Printing_Files)
+### Design Files
+ - [CAD Files](/Design_Files)
 
-### EAGLE PCB Design Files
- - [PCB_Files](/Design_Files/PCB_Files/)
+### Build Files
+ - [3D Printing Files](/Build_Files/3D_Printing_Files)
 
 ## Attribution
 Designers:
