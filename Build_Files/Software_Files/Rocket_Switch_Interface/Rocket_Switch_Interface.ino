@@ -37,7 +37,7 @@ int switch2State;
 
 //Stopwatches array used to time switch presses
 StopWatch timeWatcher[3];
-StopWatch switch2TimeWatcher[1];
+StopWatch switch1TimeWatcher[1];
 
 //Declare Switch variables for settings 
 int switchConfigured;
@@ -98,7 +98,7 @@ typedef struct {
 //Color properties 
 const colorStruct colorProperty[] {
     {1,"Green",{60,0,0}},
-    {2,"Pink",{0,50,60}},
+    {2,"Pink",{0,50,40}},
     {3,"Yellow",{60,50,0}},    
     {4,"Orange",{20,60,0}},
     {5,"Blue",{0,0,60}},
@@ -164,7 +164,7 @@ void loop() {
   static int ctr;                          //Control variable to set previous status of switches 
   unsigned long timePressed;               //Time that switch one or two are pressed
   unsigned long timeNotPressed;            //Time that switch one or two are not pressed
-  static int previousSwitch2State;         //Previous status of switch 2
+  static int previousSwitch1State;         //Previous status of switch 1
   
   //Update status of switch inputs
   switch1State = digitalRead(SWITCH1_PIN);
@@ -172,29 +172,29 @@ void loop() {
 
   timePressed = timeNotPressed  = 0;       //reset time counters
   if (!ctr) {                              //Set previous status of switch two 
-    previousSwitch2State = HIGH;  
+    previousSwitch1State = HIGH;  
     ctr++;
   }
-  //Check if switch 2 is pressed to change switch mode
-  if (switch2State == LOW && previousSwitch2State == HIGH) {
-     if (switch2State == LOW) { 
-      previousSwitch2State = LOW; 
+  //Check if switch 1 is pressed to change switch mode
+  if (switch1State == LOW && previousSwitch1State == HIGH) {
+     if (switch1State == LOW) { 
+      previousSwitch1State = LOW; 
      }
-     switch2TimeWatcher[0].stop();                                //Reset and start the timer         
-     switch2TimeWatcher[0].reset();                                                                        
-     switch2TimeWatcher[0].start(); 
+     switch1TimeWatcher[0].stop();                                //Reset and start the timer         
+     switch1TimeWatcher[0].reset();                                                                        
+     switch1TimeWatcher[0].start(); 
   }
-  // Switch 2 was released
-  if (switch2State == HIGH && previousSwitch2State == LOW) {
-    previousSwitch2State = HIGH;
-    timePressed = switch2TimeWatcher[0].elapsed();                //Calculate the time that switch one was pressed 
-    switch2TimeWatcher[0].stop();                                 //Stop the single action (dot/dash) timer and reset
-    switch2TimeWatcher[0].reset();
+  // Switch 1 was released
+  if (switch1State == HIGH && previousSwitch1State == LOW) {
+    previousSwitch1State = HIGH;
+    timePressed = switch1TimeWatcher[0].elapsed();                //Calculate the time that switch one was pressed 
+    switch1TimeWatcher[0].stop();                                 //Stop the single action (dot/dash) timer and reset
+    switch1TimeWatcher[0].reset();
     //Perform action if the switch has been hold active for specified time
     if (timePressed >= SWITCH_MODE_CHANGE_TIME){
       incrementSwitchMode();                                                                
     } else if(switchMode==4) {
-      settingsAction(switch1State,LOW); 
+      settingsAction(LOW,switch2State); 
     }
   }
   //Perform actions based on the mode
@@ -209,7 +209,7 @@ void loop() {
         mouseAction(switch1State,switch2State);                                             //Mouse Switch mode
         break;
       case 4:
-        settingsAction(switch1State,HIGH);                                                  //Settings mode
+        settingsAction(HIGH,switch2State);                                                  //Settings mode
         break;
   };
   ledPixels.show(); 
@@ -224,7 +224,7 @@ void displayFeatureList(void) {
   Serial.println(" --- ");
   Serial.println("Rocket Switch Interface");
   Serial.println(" ");
-  Serial.println("VERSION: 1.0 (5 October 2022)");
+  Serial.println("VERSION: 1.0 (November 2022)");
   Serial.println(" --- ");
   Serial.println(" ");
 
@@ -410,9 +410,9 @@ void switchSetup() {
     Serial.print("Switch Reaction Level: ");
     Serial.println(switchReactionLevel);
     Serial.print("Reaction Time(ms): ");
-    Serial.print(switchReactionTime);
+    Serial.println(switchReactionTime);
     Serial.print("Mouse Move (0-127): ");
-    Serial.print(switchMouseMove);
+    Serial.println(switchMouseMove);
     //Calculate switch delay based on switchReactionLevel
     switchReactionTime = ((11-switchReactionLevel)*SWITCH_REACTION_TIME);
 }
@@ -565,7 +565,7 @@ void updateReactionLevel(int inputReactionLevel) {
     Serial.print("Reaction level: ");
     Serial.println(switchReactionLevel);
     Serial.print("Reaction Time(ms): ");
-    Serial.print(switchReactionTime);
+    Serial.println(switchReactionTime);
     switchReactionLevelFlash.write(switchReactionLevel);
     delay(25);
   } else {
@@ -590,7 +590,7 @@ void increaseReactionLevel(void) {
   Serial.print("Reaction level: ");
   Serial.println(switchReactionLevel);
   Serial.print("Reaction Time(ms): ");
-  Serial.print(switchReactionTime);
+  Serial.println(switchReactionTime);
   switchReactionLevelFlash.write(switchReactionLevel);
   delay(25);
 }
@@ -612,7 +612,7 @@ void decreaseReactionLevel(void) {
   Serial.print("Reaction level: ");
   Serial.println(switchReactionLevel);
   Serial.print("Reaction Time(ms): ");
-  Serial.print(switchReactionTime);
+  Serial.println(switchReactionTime);
   
   switchReactionLevelFlash.write(switchReactionLevel);
   delay(25);
