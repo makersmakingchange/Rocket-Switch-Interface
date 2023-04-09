@@ -23,7 +23,6 @@ key_pin_array = []
 # To view a complete list of available keycodes: 
 # https://docs.circuitpython.org/projects/hid/en/latest/_modules/adafruit_hid/keycode.html
 keys_pressed = [Keycode.TAB, Keycode.SPACE]
-control_key = Keycode.SHIFT
 
 # The keyboard object!
 time.sleep(1)  # Sleep for a bit to avoid a race condition on some systems
