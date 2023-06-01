@@ -63,13 +63,13 @@ The code can be found in the [Software_Files](/Build_Files/Software_Files/) fold
 ### Documentation
 | Document             | Version | Link |
 |----------------------|---------|------|
-| Design Rationale     | 1.0     | [Rocket Switch Interface Design_Rationale](/Documentation/Rocket_Switch_Interface_Design_Rationale.pdf)     |
-| Maker Checklist      | 1.0     | [Rocket Switch Interface Link_Maker_Checklist](/Documentation/Rocket_Switch_Interface_Maker_Checklist.pdf)     |
-| Bill of Materials    | 1.0     | [Rocket Switch Interface Link_Bill_of_Materials](/Documentation/Rocket_Switch_Interface_BOM.xlsx)     |
-| 3D Printing Guide    | 1.0     | [Rocket Switch Interface Link_3D_Printing_Guide](/Documentation/Rocket_Switch_Interface_3D_Printing_Guide.pdf)     |
-| Assembly Guide       | 1.0     | [Rocket Switch Interface Link_Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf)     |
-| User Guide           | 1.0     | [Rocket Switch Interface Link_User_Guide](/Documentation/Rocket_Switch_Interface_User_Guide.pdf)    |
-| Changelog            | 1.0     | [Rocket Switch Interface Link_Changelog](/Documentation/Rocket_Switch_Interface_Changelog.pdf)     |
+| Design Rationale     | 1.1     | [Rocket Switch Interface Design_Rationale](/Documentation/Rocket_Switch_Interface_Design_Rationale.pdf)     |
+| Maker Checklist      | 1.1     | [Rocket Switch Interface Link_Maker_Checklist](/Documentation/Rocket_Switch_Interface_Maker_Checklist.pdf)     |
+| Bill of Materials    | 1.1     | [Rocket Switch Interface Link_Bill_of_Materials](/Documentation/Rocket_Switch_Interface_BOM.xlsx)     |
+| 3D Printing Guide    | 1.1     | [Rocket Switch Interface Link_3D_Printing_Guide](/Documentation/Rocket_Switch_Interface_3D_Printing_Guide.pdf)     |
+| Assembly Guide       | 1.1     | [Rocket Switch Interface Link_Assembly_Guide](/Documentation/Rocket_Switch_Interface_Assembly_Guide.pdf)     |
+| User Guide           | 1.1     | [Rocket Switch Interface Link_User_Guide](/Documentation/Rocket_Switch_Interface_User_Guide.pdf)    |
+| Changelog            | 1.1     | [Rocket Switch Interface Link_Changelog](/Documentation/Rocket_Switch_Interface_Changelog.pdf)     |
 
 ### Case Design Files
  - [3D_Printing_Files](/Design_Files/3D_Printing_Files)
