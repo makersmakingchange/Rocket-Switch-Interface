@@ -110,8 +110,8 @@ const colorStruct colorProperty[] {
 
 //Switch properties 
 const switchStruct switchProperty[] {
-    {1,'a', '1', 5, 6},                             //{1=dot,'a',  KEY_BACKSPACE, mouse action 5, 6=red}
-    {2,'b', '2', 6, 5}                              //{2=dash,'b',KEY_ENTER, mouse action 6, 5=blue}
+    {1,'a', '1', 5, 6},                             //{1=dot,'a', '1', mouse action 5, 6=red}
+    {2,'b', '2', 6, 5}                              //{2=dash,'b','2', mouse action 6, 5=blue}
 };
 
 
