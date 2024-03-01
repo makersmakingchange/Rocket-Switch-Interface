@@ -1,13 +1,12 @@
 /** ************************************************************************
- * File Name: Rocket_Switch_Interface.ino 
- * Title: Rocket Switch Interface
+ * File Name: Rocket_Switch_Interface_Firmware.ino 
+ * Title: Rocket Switch Interface Firmware
  * Developed by: MakersMakingChange
- * Version Number: 1.1 (15/11/2022)
+ * Version Number: 1.2 (26-02-2024)
  * Github Link: https://github.com/makersmakingchange/Rocket-Switch-Interface
  ***************************************************************************/
-
-#include "Mouse.h"
-#include "Keyboard.h"
+ 
+#include "MouseKeyboard.h"
 #include <StopWatch.h>
 #include <math.h>
 #include <Adafruit_NeoPixel.h>
@@ -111,8 +110,8 @@ const colorStruct colorProperty[] {
 
 //Switch properties 
 const switchStruct switchProperty[] {
-    {1,'a', KEY_F1, 5, 6},                             //{1=dot,'a',  KEY_F1, mouse action 5, 6=red}
-    {2,'b', KEY_F2, 6, 5}                              //{2=dash,'b',KEY_F2, mouse action 6, 5=blue}
+    {1,0x20, '1', 5, 6},                             //{1=dot, KEY_SPACE, '1', mouse action 5, 6=red}
+    {2,0x0a, '2', 6, 5}                              //{2=dash,KEY_ENTER, '2', mouse action 6, 5=blue}
 };
 
 
@@ -134,6 +133,8 @@ const modeStruct modeProperty[] {
     {4,"Settings",4}
 };
 
+USBMouse mouse;                                    //Starts an instance of the USB mouse object
+USBKeyboard keyboard;                                    //Starts an instance of the USB keyboard object
 
 //Setup NeoPixel LED
 Adafruit_NeoPixel ledPixels = Adafruit_NeoPixel(1, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -142,8 +143,8 @@ void setup() {
 
   ledPixels.begin();                                                           //Start NeoPixel
   Serial.begin(115200);                                                        //Start Serial
-  Keyboard.begin();                                                            //Starts keyboard emulation
-  Mouse.begin();                                                               //Starts mouse emulation
+  mouse.begin();
+  keyboard.begin();
   delay(1000);
   switchSetup();                                                               //Setup switch
   delay(5); 
@@ -192,6 +193,7 @@ void loop() {
     switch1TimeWatcher[0].reset();
     //Perform action if the switch has been hold active for specified time
     if (timePressed >= SWITCH_MODE_CHANGE_TIME){
+      releaseAllInputs();
       incrementSwitchMode();                                                                
     } else if(switchMode==4) {
       settingsAction(LOW,switch2State); 
@@ -431,14 +433,14 @@ void keyboardAction(bool macMode, int switch1,int switch2) {
     if(!switch1) {
       switchFeedback(1,switchMode,switchReactionTime,1);
       //Serial.println("a");
-      (macMode) ? Keyboard.press(switchProperty[0].switchMacChar) : Keyboard.press(switchProperty[0].switchChar);
+      (macMode) ? keyboard.press(switchProperty[0].switchMacChar) : keyboard.press(switchProperty[0].switchChar);
     } else if(!switch2) {
       switchFeedback(2,switchMode,switchReactionTime,1);
       //Serial.println("b");
-      (macMode) ? Keyboard.press(switchProperty[1].switchMacChar) : Keyboard.press(switchProperty[1].switchChar);
+      (macMode) ? keyboard.press(switchProperty[1].switchMacChar) : keyboard.press(switchProperty[1].switchChar);
     } else
     {
-      Keyboard.releaseAll();
+      keyboard.releaseAll();
     }
     delay(5);
 
@@ -467,35 +469,35 @@ void mousePerform(int actionNumber,int xValue,int yValue) {
       case 0:
         break;
       case 1:
-        Mouse.move(0, -yValue*MOUSE_MOVE_MULTI, 0);
+        mouse.move(0, -yValue*MOUSE_MOVE_MULTI);
         break;
       case 2:
-        Mouse.move(0, yValue*MOUSE_MOVE_MULTI, 0);
+        mouse.move(0, yValue*MOUSE_MOVE_MULTI);
         break;
       case 3:
-        Mouse.move(-xValue*MOUSE_MOVE_MULTI, 0, 0);
+        mouse.move(-xValue*MOUSE_MOVE_MULTI, 0);
         break;
       case 4:
-        Mouse.move(xValue*MOUSE_MOVE_MULTI, 0, 0);
+        mouse.move(xValue*MOUSE_MOVE_MULTI, 0);
         break;
       case 5:
-        if (!Mouse.isPressed(MOUSE_LEFT)) {
-          Mouse.press(MOUSE_LEFT);
+        if (!mouse.isPressed(MOUSE_LEFT)) {
+          mouse.press(MOUSE_LEFT);
           delay(50);
-          Mouse.release(MOUSE_LEFT);
+          mouse.release(MOUSE_LEFT);
         } 
-        else if (Mouse.isPressed(MOUSE_LEFT)) {
-          Mouse.release(MOUSE_LEFT);
+        else if (mouse.isPressed(MOUSE_LEFT)) {
+          mouse.release(MOUSE_LEFT);
         }    
         break;
       case 6:
-        if (!Mouse.isPressed(MOUSE_RIGHT)) {
-          Mouse.press(MOUSE_RIGHT);
+        if (!mouse.isPressed(MOUSE_RIGHT)) {
+          mouse.press(MOUSE_RIGHT);
           delay(50);
-          Mouse.release(MOUSE_RIGHT);
+          mouse.release(MOUSE_RIGHT);
         }
-        else if (Mouse.isPressed(MOUSE_RIGHT)) {
-          Mouse.release(MOUSE_RIGHT);
+        else if (mouse.isPressed(MOUSE_RIGHT)) {
+          mouse.release(MOUSE_RIGHT);
         }   
         break;                         
   };
@@ -616,4 +618,11 @@ void decreaseReactionLevel(void) {
   
   switchReactionLevelFlash.write(switchReactionLevel);
   delay(25);
+}
+
+//*** RELEASE ALL INPUTS FUNCTION **//
+void releaseAllInputs(void){
+  keyboard.releaseAll();
+  mouse.release(MOUSE_LEFT);
+  mouse.release(MOUSE_RIGHT);
 }

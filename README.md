@@ -4,9 +4,9 @@ The Rocket-Switch-Interface is a switch interface device which enables users to 
 ## Usage
 Both switches can be used as inputs when short pressed, switch 1 can be used to change the operation mode when it’s pressed and hold for 4 seconds. The device can operate in several modes:
 
-•	Switch Mode: This mode can be used along switch control software available for Windows and Android Operating Systems. Switch 1 outputs A key and switch 2 outputs B key.
+•	Switch Mac Mode: This mode can be used along switch control software available for Windows, Android, iOS, and Mac Operating Systems. Switch 1 outputs the Space key and switch 2 outputs the Enter key.
 
-•	Switch Mac Mode: This mode can be used along switch control software available for Mac Operating Systems. Switch 1 outputs F1 key and switch 2 outputs F2 key.
+•	Switch Mode: This mode can be used along switch control software available for Windows, Android, and iOS Operating Systems. Switch 1 outputs the 1 key and switch 2 outputs the 2 key.
 
 •	Mouse Mode: This mode can be used to simulate a mouse button click. Switch 1 performs left mouse click and switch 2 performs right mouse click.
 
