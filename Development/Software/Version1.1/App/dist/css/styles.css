@@ -1,0 +1,93 @@
+:root {
+  --color-active: #6e7ca0;
+  --color-primary: #c57186;
+  --color-background: #384e78;
+  --color-background-light  : rgba(255, 255, 255, 0.1);
+  --color-primary-light: #d7d6da;
+  --color-white: #fff;
+}
+
+body {
+  font-size: 1.5em;
+  background-color: var(--color-background);
+  font-family: 'Poppins', sans-serif;
+  color: var(--color-primary-light);
+  text-align: center;
+}
+
+.repo-link a {
+  color: var(--color-primary-light)
+}
+
+
+button {
+  appearance: none;
+  border: solid 2px var(--color-active);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  padding: 2rem 1rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 1.3ch;
+}
+
+@media screen and (min-width: 640px) {
+  button {
+    padding: 2rem 4rem;
+  }
+}
+
+button:disabled {
+  background-color: var(--color-background);
+  color: var(--color-background-light);
+  border: none;
+}
+
+button:hover:not(:disabled),
+button:focus {
+  background-color: var(--color-active);
+}
+
+.elements {
+  counter-reset: the-counter;
+}
+
+.element {
+  counter-increment: the-counter;
+  margin: 1.5rem 3rem;
+  background-color: var(--color-background-light);
+  padding: 1.5rem 3.5rem;
+  word-break: break-word;
+}
+
+.element::before {
+  content: counter(the-counter);
+  font-weight: bold;
+  font-size: 5.5rem;
+}
+
+.element h2 {
+  margin-top: 0;
+}
+
+ol > li {
+  text-align: start;
+}
+
+.color-picker-container {
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.color-picker {
+  padding: 0;
+  border: none;
+  width: 200px;
+  height: 200px;
+  outline: none;
+  transform: translate(-25%, -25%)
+}
