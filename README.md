@@ -1,8 +1,13 @@
-# Rocket-Switch-Interface
-The Rocket-Switch-Interface is a switch interface device which enables users to operate their computer or smartphone devices using adaptive switches. Rocket-Switch-Interface supports up to two input 3.5mm adaptive switches.
+# Rocket Switch Interface
+The Rocket Switch Interface is a switch interface device which enables users to operate their computer or smartphone devices using assistive switches. The Rocket Switch Interface supports up to two 3.5 mm assistive switches as input.
+
+<img src="Photos/Rocket-Switch-Interface-Assembled.png" height="350" alt="A picture of a 3d printed Rocket Switch Interface">
+
+## More info at
+- [Makers Making Change Project Page](https://makersmakingchange.com/project/rocket-switch-interface/)
 
 ## Usage
-Both switches can be used as inputs when short pressed, switch 1 can be used to change the operation mode when it's pressed and hold for 4 seconds. The device can operate in several modes:
+Both switches can be used as inputs when short pressed, Switch 1 can be used to change the operation mode when it's pressed and hold for 4 seconds. The device can operate in several modes:
 
  - Switch Mac Mode: This mode can be used along switch control software available for Windows, Android, iOS, and Mac Operating Systems. Switch 1 outputs the Space key and switch 2 outputs the Enter key.
 
@@ -11,12 +16,6 @@ Both switches can be used as inputs when short pressed, switch 1 can be used to 
  - Mouse Mode: This mode can be used to simulate a mouse button click. Switch 1 performs left mouse click and switch 2 performs right mouse click.
 
  - Settings Mode: The settings mode allows the user to adjust the reaction time between switch presses. There are 10 levels in total and the default reaction level is set to 9. The minimum reaction time is 50ms ( Level 10 ) and maximum reaction time is 500ms ( Level 1 ). Switch 1 decrements the reaction level by 1 level and switch 2 increments the reaction level by 1 level as well.
-
-<img src="Photos/Rocket-Switch-Interface-Assembled.png" width="500" alt="A picture of a 3d printed Rocket Switch Interface">
-
-## More info at
-- [Makers Making Change Project Page](https://makersmakingchange.com/project/rocket-switch-interface/)
-
 
 ## How to Obtain a Rocket Switch Interface
 
@@ -86,6 +85,7 @@ Accompanying material such as instruction manuals, videos, and other copyrightab
 
 ----
 
+<!-- ABOUT MMC START -->
 ## About Makers Making Change
 [<img src="https://raw.githubusercontent.com/makersmakingchange/makersmakingchange/main/img/mmc_logo.svg" width="500" alt="Makers Making Change Logo">](https://www.makersmakingchange.com/)
 
@@ -104,4 +104,4 @@ Makers Making Change leverages the capacity of community based Makers, Disabilit
 
 ### Contact Us
 For technical questions, to get involved, or to share your experience we encourage you to [visit our website](https://www.makersmakingchange.com/) or [contact us](https://www.makersmakingchange.com/s/contact).
-
+<!-- ABOUT MMC END -->
