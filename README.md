@@ -1,7 +1,7 @@
 # Rocket Switch Interface
 The Rocket Switch Interface is a switch interface device which enables users to operate their computer or smartphone devices using assistive switches. The Rocket Switch Interface supports up to two 3.5 mm assistive switches as input.
 
-<img src="Photos/Rocket-Switch-Interface-Assembled.png" height="350" alt="A picture of a 3d printed Rocket Switch Interface">
+<img src="Photos/Rocket-Switch-Interface-Assembled.png" height="250" alt="A picture of a 3d printed Rocket Switch Interface">
 
 ## More info at
 - [Makers Making Change Project Page](https://makersmakingchange.com/project/rocket-switch-interface/)
